@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
-      body: ''
+      body: '',
+      createdAt: ''
     };
   }
 
@@ -21,19 +23,23 @@ class App extends Component {
 
     axios.get(url, { headers: { 'Authorization': `Bearer ${accessToken}`}})
       .then(res => {
-        const blogItem = res.data.items[0].fields;
+        const blogItem = res.data.items[0];
+        console.log(blogItem)
         this.setState({
-          title: blogItem.title,
-          body: blogItem.body
+          title: blogItem.fields.title,
+          body: blogItem.fields.body,
+          createdAt: blogItem.sys.createdAt
         })
       });
   }
   
   render() {
+    const { title, body, createdAt } = this.state
     return (
       <div>
-        <h2>{this.state.title}</h2>
-        <p>{this.state.body}</p>
+        <h1>{title}</h1>
+        <p>作成日: {createdAt}</p>
+        <ReactMarkdown source={body} />
       </div>
     );
   }
