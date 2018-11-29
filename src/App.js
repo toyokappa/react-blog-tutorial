@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
+import * as moment from 'moment';
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class App extends Component {
     this.state = {
       title: '',
       body: '',
-      createdAt: ''
+      createdAt: '',
+      updatedAt: ''
     };
   }
 
@@ -28,17 +30,19 @@ class App extends Component {
         this.setState({
           title: blogItem.fields.title,
           body: blogItem.fields.body,
-          createdAt: blogItem.sys.createdAt
+          createdAt: blogItem.sys.createdAt,
+          updatedAt: blogItem.sys.updatedAt
         })
       });
   }
   
   render() {
-    const { title, body, createdAt } = this.state
+    const { title, body, createdAt, updatedAt } = this.state
     return (
       <div>
         <h1>{title}</h1>
-        <p>作成日: {createdAt}</p>
+        <div>作成日: {moment(createdAt).format('YYYY.MM.DD HH:mm')}</div>
+        <div>更新日: {moment(updatedAt).format('YYYY.MM.DD HH:mm')}</div>
         <ReactMarkdown source={body} />
       </div>
     );
