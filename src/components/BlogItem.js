@@ -26,8 +26,11 @@ class BlogIndex extends Component {
     getEntry(id)
       .then(res => {
         const blogItem = res.data;
-        const eyeCatchId = blogItem.fields.eyeCatch.sys.id
-        if (eyeCatchId) this.setBlogEyeCatch(eyeCatchId);
+        const eyeCatch = blogItem.fields.eyeCatch;
+        if (eyeCatch) {
+          const eyeCatchId = eyeCatch.sys.id
+          this.setBlogEyeCatch(eyeCatchId);
+        }
         this.setState({
           title: blogItem.fields.title,
           body: blogItem.fields.body,
