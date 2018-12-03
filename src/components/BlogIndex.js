@@ -16,9 +16,9 @@ class BlogIndex extends Component {
 
   setBlogContent() {
     const spaceId = "rlz1oc4sgyfk";
+    const url = `https://cdn.contentful.com/spaces/${spaceId}/entries`;
     const accessToken =
       "f5dfdf9b1672f3cbbf5030c269fff9d9a0b349ed42a2a66b3d56ed747185603a";
-    const url = `https://cdn.contentful.com/spaces/${spaceId}/entries`;
 
     axios
       .get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
