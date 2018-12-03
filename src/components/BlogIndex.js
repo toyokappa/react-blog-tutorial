@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { getEntries } from "../api/contentfulApi";
 
 class BlogIndex extends Component {
   constructor(props) {
@@ -15,13 +15,7 @@ class BlogIndex extends Component {
   }
 
   setBlogContent() {
-    const spaceId = "rlz1oc4sgyfk";
-    const url = `https://cdn.contentful.com/spaces/${spaceId}/entries`;
-    const accessToken =
-      "f5dfdf9b1672f3cbbf5030c269fff9d9a0b349ed42a2a66b3d56ed747185603a";
-
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
+    getEntries()
       .then(res => {
         const blogList = res.data.items;
         const blogIndex = blogList.map(blogItem => {

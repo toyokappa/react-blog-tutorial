@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import * as moment from "moment";
+import { getEntry, getAsset } from "../api/contentfulApi";
 
 class BlogIndex extends Component {
   constructor(props) {
@@ -22,14 +22,8 @@ class BlogIndex extends Component {
   }
 
   setBlogContent() {
-    const spaceId = "rlz1oc4sgyfk";
     const { id } = this.props.match.params;
-    const url = `https://cdn.contentful.com/spaces/${spaceId}/entries/${id}`;
-    const accessToken =
-      "f5dfdf9b1672f3cbbf5030c269fff9d9a0b349ed42a2a66b3d56ed747185603a";
-
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
+    getEntry(id)
       .then(res => {
         const blogItem = res.data;
         const eyeCatchId = blogItem.fields.eyeCatch.sys.id
@@ -55,13 +49,7 @@ class BlogIndex extends Component {
   }
 
   setBlogEyeCatch(id) {
-    const spaceId = "rlz1oc4sgyfk";
-    const url = `https://cdn.contentful.com/spaces/${spaceId}/assets/${id}`;
-    const accessToken =
-      "f5dfdf9b1672f3cbbf5030c269fff9d9a0b349ed42a2a66b3d56ed747185603a";
-
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
+    getAsset(id)
       .then(res => {
         const eyeCatchUrl = res.data.fields.file.url;
         this.setState({ eyeCatchUrl: eyeCatchUrl });
