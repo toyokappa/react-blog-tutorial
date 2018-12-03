@@ -7,6 +7,8 @@ class BlogIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isError: false,
+      errorMsg: "",
       title: "",
       body: "",
       createdAt: "",
@@ -35,11 +37,24 @@ class BlogIndex extends Component {
           createdAt: blogItem.sys.createdAt,
           updatedAt: blogItem.sys.updatedAt
         });
+      })
+      .catch(error => {
+        const errorRes = error.response;
+        let errorInfo = { isError: true };
+        if (errorRes.status === 404) {
+          errorInfo["errorMsg"] =
+            "指定したコンテンツは存在しないか削除されました。";
+        } else {
+          errorInfo["errorMsg"] = "予期せぬエラーが発生しました。";
+        }
+        this.setState(errorInfo);
       });
   }
 
   render() {
-    const { title, body, createdAt, updatedAt } = this.state;
+    const { isError, errorMsg, title, body, createdAt, updatedAt } = this.state;
+    if (isError) return <div>{errorMsg}</div>;
+
     return (
       <div>
         <h1>{title}</h1>
