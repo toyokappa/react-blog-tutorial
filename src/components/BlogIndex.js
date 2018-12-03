@@ -1,17 +1,12 @@
-
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import ReactMarkdown from "react-markdown";
-import * as moment from "moment";
 
 class BlogIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      body: "",
-      createdAt: "",
-      updatedAt: ""
+      blogIndex: []
     };
   }
 
@@ -28,27 +23,27 @@ class BlogIndex extends Component {
     axios
       .get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
       .then(res => {
-        const blogItem = res.data.items[0];
-        console.log(blogItem);
-        this.setState({
-          title: blogItem.fields.title,
-          body: blogItem.fields.body,
-          createdAt: blogItem.sys.createdAt,
-          updatedAt: blogItem.sys.updatedAt
+        const blogList = res.data.items;
+        const blogIndex = blogList.map(blogItem => {
+          return { id: blogItem.sys.id, title: blogItem.fields.title };
         });
+        this.setState({ blogIndex: blogIndex });
       });
   }
 
+  renderBlogIndex(index) {
+    const blogIndex = index.map(item => {
+      return (
+        <li key={item.id}>
+          <Link to={`blog/${item.id}`}>{item.title}</Link>
+        </li>
+      );
+    });
+    return <ul>{blogIndex}</ul>;
+  }
+
   render() {
-    const { title, body, createdAt, updatedAt } = this.state;
-    return (
-      <div>
-        <h1>{title}</h1>
-        <div>作成日: {moment(createdAt).format("YYYY.MM.DD HH:mm")}</div>
-        <div>更新日: {moment(updatedAt).format("YYYY.MM.DD HH:mm")}</div>
-        <ReactMarkdown source={body} />
-      </div>
-    );
+    return <div>{this.renderBlogIndex(this.state.blogIndex)}</div>;
   }
 }
 
