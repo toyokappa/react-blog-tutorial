@@ -28,7 +28,7 @@ class BlogIndex extends Component {
         const blogItem = res.data;
         const eyeCatch = blogItem.fields.eyeCatch;
         if (eyeCatch) {
-          const eyeCatchId = eyeCatch.sys.id
+          const eyeCatchId = eyeCatch.sys.id;
           this.setBlogEyeCatch(eyeCatchId);
         }
         this.setState({
@@ -42,8 +42,7 @@ class BlogIndex extends Component {
         const errorRes = error.response;
         let errorInfo = { isError: true };
         if (errorRes.status === 404) {
-          errorInfo["errorMsg"] =
-            "指定したコンテンツは存在しないか削除されました。";
+          errorInfo["errorMsg"] = "指定したコンテンツは存在しないか削除されました。";
         } else {
           errorInfo["errorMsg"] = "予期せぬエラーが発生しました。";
         }
@@ -52,11 +51,10 @@ class BlogIndex extends Component {
   }
 
   setBlogEyeCatch(id) {
-    getAsset(id)
-      .then(res => {
-        const eyeCatchUrl = res.data.fields.file.url;
-        this.setState({ eyeCatchUrl: eyeCatchUrl });
-      });
+    getAsset(id).then(res => {
+      const eyeCatchUrl = res.data.fields.file.url;
+      this.setState({ eyeCatchUrl: eyeCatchUrl });
+    });
   }
 
   render() {

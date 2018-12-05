@@ -15,14 +15,13 @@ class BlogIndex extends Component {
   }
 
   setBlogContent() {
-    getEntries()
-      .then(res => {
-        const blogList = res.data.items;
-        const blogIndex = blogList.map(blogItem => {
-          return { id: blogItem.sys.id, title: blogItem.fields.title };
-        });
-        this.setState({ blogIndex: blogIndex });
+    getEntries().then(res => {
+      const blogList = res.data.items;
+      const blogIndex = blogList.map(blogItem => {
+        return { id: blogItem.sys.id, title: blogItem.fields.title };
       });
+      this.setState({ blogIndex: blogIndex });
+    });
   }
 
   renderBlogIndex(index) {
