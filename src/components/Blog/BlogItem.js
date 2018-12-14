@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMarkdown from "react-markdown";
+import Markdown from "./Markdown";
 import * as moment from "moment";
 import { Row, Col } from "react-bootstrap";
 import styled from "styled-components";
@@ -73,7 +73,7 @@ class BlogItem extends Component {
             <span>更新日: {moment(updatedAt).format("YYYY.MM.DD HH:mm")}</span>
           </div>
           <BlogContent>
-            <ReactMarkdown source={body} />
+            <Markdown body={body} />
           </BlogContent>
         </Col>
       </Row>
