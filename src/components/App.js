@@ -7,10 +7,10 @@ import Wrapper from "./Wrapper";
 const App = () => {
   return (
     <BrowserRouter>
-      <div>
+      <>
         <Header />
         <Wrapper />
-      </div>
+      </>
     </BrowserRouter>
   );
 };

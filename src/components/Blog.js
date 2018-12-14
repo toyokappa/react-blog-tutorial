@@ -6,10 +6,10 @@ import BlogItem from "./BlogItem";
 
 const Blog = () => {
   return (
-    <div>
+    <>
       <Route exact path="/blog" component={BlogIndex} />
       <Route path="/blog/:id" component={BlogItem} />
-    </div>
+    </>
   );
 };
 

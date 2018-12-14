@@ -36,7 +36,7 @@ class BlogIndex extends Component {
   }
 
   render() {
-    return <div>{this.renderBlogIndex(this.state.blogIndex)}</div>;
+    return this.renderBlogIndex(this.state.blogIndex);
   }
 }
 

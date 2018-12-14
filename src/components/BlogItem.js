@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactMarkdown from "react-markdown";
 import * as moment from "moment";
+import { Row, Col } from "react-bootstrap";
 import { getEntry, getAsset } from "../api/contentfulApi";
 
 class BlogIndex extends Component {
@@ -62,13 +63,17 @@ class BlogIndex extends Component {
     if (isError) return <div>{errorMsg}</div>;
 
     return (
-      <div>
-        <h1>{title}</h1>
-        <img src={eyeCatchUrl} alt="eye_catch" />
-        <div>作成日: {moment(createdAt).format("YYYY.MM.DD HH:mm")}</div>
-        <div>更新日: {moment(updatedAt).format("YYYY.MM.DD HH:mm")}</div>
-        <ReactMarkdown source={body} />
-      </div>
+      <Row className="justify-content-center">
+        <Col md={8}>
+          <h1>{title}</h1>
+          <img src={eyeCatchUrl} alt="eye_catch" className="w-100" />
+          <div className="my-3 text-right">
+            <span className="mr-3">作成日: {moment(createdAt).format("YYYY.MM.DD HH:mm")}</span>
+            <span>更新日: {moment(updatedAt).format("YYYY.MM.DD HH:mm")}</span>
+          </div>
+          <ReactMarkdown source={body} />
+        </Col>
+      </Row>
     );
   }
 }
