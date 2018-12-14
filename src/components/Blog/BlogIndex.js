@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getEntries } from "../api/contentfulApi";
+import { getEntries } from "../../api/contentfulApi";
 
 class BlogIndex extends Component {
   constructor(props) {

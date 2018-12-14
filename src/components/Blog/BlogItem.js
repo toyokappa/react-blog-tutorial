@@ -3,13 +3,7 @@ import ReactMarkdown from "react-markdown";
 import * as moment from "moment";
 import { Row, Col } from "react-bootstrap";
 import styled from "styled-components";
-import { getEntry, getAsset } from "../api/contentfulApi";
-
-const BlogContent = styled.div`
-  img {
-    width: 100%;
-  }
-`;
+import { getEntry, getAsset } from "../../api/contentfulApi";
 
 class BlogItem extends Component {
   constructor(props) {
@@ -86,5 +80,11 @@ class BlogItem extends Component {
     );
   }
 }
+
+const BlogContent = styled.div`
+  img {
+    width: 100%;
+  }
+`;
 
 export default BlogItem;
