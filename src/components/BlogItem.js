@@ -2,9 +2,16 @@ import React, { Component } from "react";
 import ReactMarkdown from "react-markdown";
 import * as moment from "moment";
 import { Row, Col } from "react-bootstrap";
+import styled from "styled-components";
 import { getEntry, getAsset } from "../api/contentfulApi";
 
-class BlogIndex extends Component {
+const BlogContent = styled.div`
+  img {
+    width: 100%;
+  }
+`;
+
+class BlogItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,11 +78,13 @@ class BlogIndex extends Component {
             <span className="mr-3">作成日: {moment(createdAt).format("YYYY.MM.DD HH:mm")}</span>
             <span>更新日: {moment(updatedAt).format("YYYY.MM.DD HH:mm")}</span>
           </div>
-          <ReactMarkdown source={body} />
+          <BlogContent>
+            <ReactMarkdown source={body} />
+          </BlogContent>
         </Col>
       </Row>
     );
   }
 }
 
-export default BlogIndex;
+export default BlogItem;
