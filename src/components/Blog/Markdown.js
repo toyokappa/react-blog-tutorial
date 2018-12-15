@@ -1,7 +1,7 @@
 import React from "react";
 import marked from "marked";
 import hljs from "highlight.js";
-import "highlight.js/styles/railscasts.css";
+import "highlight.js/styles/androidstudio.css";
 
 class Markdown extends React.Component {
   componentWillMount() {

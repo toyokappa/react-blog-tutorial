@@ -4,7 +4,7 @@ import { Navbar, Nav } from "react-bootstrap";
 
 const Header = () => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="primary" variant="dark" fixed="top">
       <Navbar.Brand as={Link} to="/" className="navbar-brand">
         ReactBlogTutorial
       </Navbar.Brand>
